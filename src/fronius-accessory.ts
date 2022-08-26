@@ -1,7 +1,7 @@
 import { AccessoryPlugin, HAP, Logging, Service } from 'homebridge';
 import { FroniusApi } from './fronius-api';
 
-export type Metering = 'Import' | 'Export' | 'Load' | 'PV';
+export type Metering = 'Import' | 'Export' | 'Load' | 'PV' | 'SOC';
 
 export class FroniusAccessory implements AccessoryPlugin {
   private readonly log: Logging;
@@ -136,6 +136,13 @@ export class FroniusAccessory implements AccessoryPlugin {
         }
         case 'Load': {
           const loadValue = Math.abs(data.P_Load);
+          this.brightnessValue = 100;
+          this.onValue = loadValue > 0;
+          this.luxValue = loadValue;
+          break;
+        }
+        case 'SOC': {
+          const loadValue = Math.abs(data.SOC);
           this.brightnessValue = 100;
           this.onValue = loadValue > 0;
           this.luxValue = loadValue;
