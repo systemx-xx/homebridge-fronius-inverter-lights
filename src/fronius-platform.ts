@@ -68,6 +68,13 @@ class FroniusInverterLightsStaticPlatform implements StaticPlatformPlugin {
       new FroniusAccessory(
         hap,
         this.log,
+        'SOC',
+        this.froniusApi,
+        this.pollInterval,
+      ),
+      new FroniusAccessory(
+        hap,
+        this.log,
         'PV',
         this.froniusApi,
         this.pollInterval,
