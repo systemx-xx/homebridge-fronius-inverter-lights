@@ -41,7 +41,7 @@ export class FroniusApi {
           this.request = undefined;
 
           if (response.status === 200) {
-            return resolve(response.data.Body.Data.Site);
+            return resolve({ ...response.data.Body.Data.Site, ...response.data.Body.Data.Inverters.1 });
           } else {
             this.log.error(`Received invalid status code: ${response.status}`);
 
